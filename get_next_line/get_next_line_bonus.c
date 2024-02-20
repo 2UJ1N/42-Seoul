@@ -6,7 +6,7 @@
 /*   By: youjlee <youjlee@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 19:45:44 by youjlee           #+#    #+#             */
-/*   Updated: 2024/02/20 19:52:15 by youjlee          ###   ########.fr       */
+/*   Updated: 2024/02/20 20:12:00 by youjlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,4 +96,33 @@ char	*get_next_line(int fd)
 	if (*backup[fd] == '\0' && idx == 0)
 		free_memory(&backup[fd], &buffer);
 	return (buffer);
+}
+
+#include <stdio.h>
+#include <fcntl.h>
+
+int main()
+{
+	char *str;
+	char *str2;
+	int fd = open("test1.txt", O_RDONLY);
+	int fd2 = open("test2.txt", O_RDONLY);
+	while (1)
+	{
+        printf("DEBUG\n");
+		str = get_next_line(fd);
+        printf("%s", str);
+		if (!str)
+			return (0);
+        printf("DEBUG2");
+
+        free(str);
+		printf("%s", str);
+		str2 = get_next_line(fd2);
+		if (!str2)
+			return (0);
+		printf("%s", str2);
+        free(str2);
+        system("leaks a.out");
+	}
 }

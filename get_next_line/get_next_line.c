@@ -6,7 +6,7 @@
 /*   By: youjlee <youjlee@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 13:43:58 by youjlee           #+#    #+#             */
-/*   Updated: 2024/02/20 19:51:08 by youjlee          ###   ########.fr       */
+/*   Updated: 2024/02/20 20:03:35 by youjlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,10 +97,10 @@ char	*get_next_line(int fd)
 		free_memory(&backup, &buffer);
 	return (buffer);
 }
-// #include <fcntl.h>
-// #include <stdio.h>
-// int main(void){
-// 	int n = open("a.txt", O_RDONLY);
-// 	printf("%s", get_next_line(n));
+#include <fcntl.h>
+#include <stdio.h>
+int main(void){
+	int n = open("text2.txt", O_RDONLY);
+	printf("%s", get_next_line(n));
 
-// }
+}
