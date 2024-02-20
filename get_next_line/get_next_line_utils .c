@@ -6,7 +6,7 @@
 /*   By: youjlee <youjlee@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 13:48:23 by youjlee           #+#    #+#             */
-/*   Updated: 2024/02/20 16:00:43 by youjlee          ###   ########.fr       */
+/*   Updated: 2024/02/20 17:56:13 by youjlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ char	*ft_strjoin(const char *tmp, const char *buffer)
 
 	i = 0;
 	len = ft_strlen(tmp) + ft_strlen(buffer);
-	result = (char *)malloc(sizeof(char) * len + 1);
+	result = (char *)malloc(sizeof(char) * (len + 1));
 	if (!result)
 		return (NULL);
 	while (*tmp)
@@ -93,7 +93,7 @@ char	*ft_substr(char const *s, int start, int end)
 		return (NULL);
 	while (start + i < len && i < end)
 	{
-		result[i] = s[start + 1];
+		result[i] = s[start + i];
 		i++;
 	}
 	result[i] = '\0';
