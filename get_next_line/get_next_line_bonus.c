@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: youjlee <youjlee@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/20 13:43:58 by youjlee           #+#    #+#             */
-/*   Updated: 2024/02/20 19:51:08 by youjlee          ###   ########.fr       */
+/*   Created: 2024/02/20 19:45:44 by youjlee           #+#    #+#             */
+/*   Updated: 2024/02/20 19:52:15 by youjlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 void	free_memory(char **backup, char **buffer)
 {
@@ -79,28 +79,21 @@ char	*get_next_line(int fd)
 {
 	ssize_t		idx;
 	char		*buffer;
-	static char	*backup;
+	static char	*backup[OPEN_MAX];
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	if (!backup)
+	if (!backup[fd])
 	{
-		backup = ft_strdup("");
-		if (!backup)
+		backup[fd] = ft_strdup("");
+		if (!backup[fd])
 			return (NULL);
 	}
-	if (update_buffer(fd, &idx, &backup))
+	if (update_buffer(fd, &idx, &backup[fd]))
 		return (NULL);
-	if (print_line(&backup, &buffer))
+	if (print_line(&backup[fd], &buffer))
 		return (NULL);
-	if (*backup == '\0' && idx == 0)
-		free_memory(&backup, &buffer);
+	if (*backup[fd] == '\0' && idx == 0)
+		free_memory(&backup[fd], &buffer);
 	return (buffer);
 }
-// #include <fcntl.h>
-// #include <stdio.h>
-// int main(void){
-// 	int n = open("a.txt", O_RDONLY);
-// 	printf("%s", get_next_line(n));
-
-// }
