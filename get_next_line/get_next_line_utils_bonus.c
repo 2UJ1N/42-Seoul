@@ -6,7 +6,7 @@
 /*   By: youjlee <youjlee@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 19:46:02 by youjlee           #+#    #+#             */
-/*   Updated: 2024/02/20 19:51:11 by youjlee          ###   ########.fr       */
+/*   Updated: 2024/02/21 16:38:06 by youjlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,14 @@ int	ft_strchr(const char *s)
 char	*ft_strdup(const char *s)
 {
 	int		i;
+	int		len;
 	char	*result;
 
-	i = ft_strlen(s);
-	result = (char *)malloc(sizeof(char) * i + 1);
+	i = -1;
+	len = ft_strlen(s);
+	result = (char *)malloc(sizeof(char) * len + 1);
 	if (!result)
 		return (NULL);
-	i = -1;
 	while (s[++i])
 		result[i] = s[i];
 	result[i] = '\0';
@@ -89,8 +90,8 @@ char	*ft_substr(char const *s, int start, int end)
 	if (len <= end || len - start < end)
 		end = len - start;
 	result = (char *)malloc(sizeof(char) * (end + 1));
-	if (result == NULL)
-		return (NULL);
+	if (!result)
+		return (free(result), result = NULL, NULL);
 	while (start + i < len && i < end)
 	{
 		result[i] = s[start + i];

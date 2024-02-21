@@ -6,13 +6,13 @@
 /*   By: youjlee <youjlee@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 19:45:44 by youjlee           #+#    #+#             */
-/*   Updated: 2024/02/20 20:12:00 by youjlee          ###   ########.fr       */
+/*   Updated: 2024/02/21 17:33:46 by youjlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
 
-void	free_memory(char **backup, char **buffer)
+void	free_memory(char **buffer, char **backup)
 {
 	free(*backup);
 	*backup = NULL;
@@ -23,42 +23,17 @@ void	free_memory(char **backup, char **buffer)
 	}
 }
 
-int	print_line(char **backup, char **line)
-{
-	int		i;
-	char	*tmp;
-
-	i = ft_strchr(*backup);
-	if (i == -1)
-		i = ft_strlen(*backup);
-	*line = ft_substr(*backup, 0, i + 1);
-	if (!(*line))
-	{
-		free(*backup);
-		*backup = NULL;
-		return (1);
-	}
-	tmp = *backup;
-	*backup = ft_substr(tmp, i + 1, ft_strlen(tmp) - i - 1);
-	free(tmp);
-	if (!(*backup))
-	{
-		free(*line);
-		return (1);
-	}
-	return (0);
-}
-
-int	update_buffer(int fd, ssize_t *idx, char **backup)
+int	update_buffer(int fd, ssize_t *idx, char **backup, char *buffer)
 {
 	char	*tmp;
-	char	buffer[BUFFER_SIZE + 1];
 
 	while (ft_strchr(*backup) == -1)
 	{
-		*idx = read(fd, &buffer, BUFFER_SIZE);
+		*idx = read(fd, buffer, BUFFER_SIZE);
 		if (*idx == -1)
 		{
+			free(buffer);
+			buffer = NULL;
 			free(*backup);
 			*backup = NULL;
 			return (1);
@@ -70,59 +45,65 @@ int	update_buffer(int fd, ssize_t *idx, char **backup)
 		*backup = ft_strjoin(tmp, buffer);
 		free(tmp);
 		if (!*backup)
-			return (1);
+			return (free(buffer), buffer = NULL, 1);
 	}
 	return (0);
+}
+
+int	print_line(char **line, char **backup)
+{
+	int		i;
+	char	*tmp;
+
+	i = ft_strchr(*backup);
+	if (i == -1)
+		i = ft_strlen(*backup);
+	*line = ft_substr(*backup, 0, i + 1);
+	if (!(*line))
+		return (free(*backup), *backup = NULL, 1);
+	tmp = *backup;
+	*backup = ft_substr(tmp, i + 1, ft_strlen(tmp) - i - 1);
+	free(tmp);
+	if (!(*backup))
+	{
+		return (free(*line), line = NULL, 1);
+	}
+	return (0);
+}
+
+void	backup_free(char **backup)
+{
+	if (*backup)
+	{
+		free(*backup);
+		*backup = NULL;
+	}
 }
 
 char	*get_next_line(int fd)
 {
 	ssize_t		idx;
+	char		*line;
 	char		*buffer;
 	static char	*backup[OPEN_MAX];
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
+	buffer = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	if (!buffer)
+		return (backup_free(&backup[fd]), free(buffer), buffer = NULL, NULL);
 	if (!backup[fd])
 	{
 		backup[fd] = ft_strdup("");
 		if (!backup[fd])
-			return (NULL);
+			return (free(buffer), buffer = NULL, NULL);
 	}
-	if (update_buffer(fd, &idx, &backup[fd]))
+	if (update_buffer(fd, &idx, &backup[fd], buffer))
 		return (NULL);
-	if (print_line(&backup[fd], &buffer))
-		return (NULL);
+		line = NULL;
+	if (print_line(&line, &backup[fd]))
+		return (free(buffer), buffer = NULL, NULL);
 	if (*backup[fd] == '\0' && idx == 0)
-		free_memory(&backup[fd], &buffer);
-	return (buffer);
-}
-
-#include <stdio.h>
-#include <fcntl.h>
-
-int main()
-{
-	char *str;
-	char *str2;
-	int fd = open("test1.txt", O_RDONLY);
-	int fd2 = open("test2.txt", O_RDONLY);
-	while (1)
-	{
-        printf("DEBUG\n");
-		str = get_next_line(fd);
-        printf("%s", str);
-		if (!str)
-			return (0);
-        printf("DEBUG2");
-
-        free(str);
-		printf("%s", str);
-		str2 = get_next_line(fd2);
-		if (!str2)
-			return (0);
-		printf("%s", str2);
-        free(str2);
-        system("leaks a.out");
-	}
+		free_memory(&line, &backup[fd]);
+	return (free(buffer), buffer = NULL, line);
 }
