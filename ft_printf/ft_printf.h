@@ -6,7 +6,7 @@
 /*   By: youjlee <youjlee@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 18:05:02 by youjlee           #+#    #+#             */
-/*   Updated: 2024/03/30 18:00:09 by youjlee          ###   ########.fr       */
+/*   Updated: 2024/03/30 18:25:52 by youjlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@
 
 size_t	ft_strlen(const char *str);
 int		ft_printf(const char *str, ...);
-int		ft_print_c(int c, int *cnt);
-int		ft_print_s(char *s, int *cnt);
+void	ft_print_c(int c, int *cnt);
+void	ft_print_s(char *s, int *cnt);
 void	chk_type(const char *str, va_list *ap, int *cnt);
 void	ft_print_nbr(int n, int *cnt);
 void	ft_print_unbr(unsigned int n, int *cnt, int call);

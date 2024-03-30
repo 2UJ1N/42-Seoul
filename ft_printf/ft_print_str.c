@@ -6,7 +6,7 @@
 /*   By: youjlee <youjlee@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 13:56:44 by youjlee           #+#    #+#             */
-/*   Updated: 2024/03/30 16:21:44 by youjlee          ###   ########.fr       */
+/*   Updated: 2024/03/30 18:26:20 by youjlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ size_t	ft_strlen(const char *str)
 	return (len);
 }
 
-int	ft_print_c(int c, int *cnt)
+void	ft_print_c(int c, int *cnt)
 {
 	if (write(1, &c, 1) == -1)
 	{
@@ -32,7 +32,7 @@ int	ft_print_c(int c, int *cnt)
 	*cnt += 1;
 }
 
-int	ft_print_s(char *s, int *cnt)
+void	ft_print_s(char *s, int *cnt)
 {
 	size_t	len;
 
@@ -42,7 +42,7 @@ int	ft_print_s(char *s, int *cnt)
 		if (write(1, "(null)", 6) == -1)
 		{
 			*cnt = -1;
-			return (-1);
+			return ;
 		}
 		*cnt += 6;
 		return ;
