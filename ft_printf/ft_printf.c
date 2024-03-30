@@ -6,13 +6,13 @@
 /*   By: youjlee <youjlee@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 18:05:37 by youjlee           #+#    #+#             */
-/*   Updated: 2024/03/30 18:20:04 by youjlee          ###   ########.fr       */
+/*   Updated: 2024/03/30 20:07:12 by youjlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	chk_type(const char *str, va_list *ap, int *cnt);
+void	chk_type(char *str, va_list ap, int *cnt);
 
 int	ft_printf(const char *str, ...)
 {
@@ -25,8 +25,8 @@ int	ft_printf(const char *str, ...)
 	va_start(ap, str);
 	while (*s)
 	{
-		if (*str == '%')
-			chk_type(++s, &ap, &cnt);
+		if (*s == '%')
+			chk_type(++s, ap, &cnt);
 		else
 		{
 			if (write(1, s, 1) == -1)
@@ -41,25 +41,22 @@ int	ft_printf(const char *str, ...)
 	return (cnt);
 }
 
-void	chk_type(const char *str, va_list *ap, int *cnt)
+void	chk_type(char *str, va_list ap, int *cnt)
 {
 	if (*str == 'c')
-		ft_print_c(va_arg(*ap, int), cnt);
+		ft_print_c(va_arg(ap, int), cnt);
 	else if (*str == 's')
-		ft_print_s(va_arg(*ap, char *), cnt);
+		ft_print_s(va_arg(ap, char *), cnt);
 	else if (*str == 'p')
-		ft_print_p(va_arg(*ap, void *), cnt);
+		ft_print_p(va_arg(ap, void *), cnt);
 	else if (*str == 'd' || *str == 'i')
-		ft_print_nbr(va_arg(*ap, int), cnt);
+		signchk(va_arg(ap, int), cnt);
 	else if (*str == 'u')
-		ft_print_unbr(va_arg(*ap, unsigned int), cnt, 0);
-	else if (*str == 'x' || *str == 'X')
-	{
-		if (*str == 'x')
-			ft_print_hex(va_arg(*ap, unsigned int), cnt, 0);
-		else
-			ft_print_hex(va_arg(*ap, unsigned int), cnt, 1);
-	}
+		ft_print_unbr(va_arg(ap, unsigned int), cnt, 0);
+	else if (*str == 'x')
+		ft_print_x(va_arg(ap, unsigned int), cnt, 0);
+	else if (*str == 'X')
+		ft_print_xx(va_arg(ap, unsigned int), cnt, 0);
 	else if (*str == '%')
 		ft_print_pcnt(cnt);
 	else

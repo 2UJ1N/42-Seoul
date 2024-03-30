@@ -6,7 +6,7 @@
 /*   By: youjlee <youjlee@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 18:05:02 by youjlee           #+#    #+#             */
-/*   Updated: 2024/03/30 18:25:52 by youjlee          ###   ########.fr       */
+/*   Updated: 2024/03/30 20:06:06 by youjlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,16 @@
 
 size_t	ft_strlen(const char *str);
 int		ft_printf(const char *str, ...);
+void	chk_type(char *str, va_list ap, int *cnt);
 void	ft_print_c(int c, int *cnt);
-void	ft_print_s(char *s, int *cnt);
-void	chk_type(const char *str, va_list *ap, int *cnt);
-void	ft_print_nbr(int n, int *cnt);
-void	ft_print_unbr(unsigned int n, int *cnt, int call);
+void	ft_print_s(char *str, int *cnt);
 void	ft_print_p(void *p, int *cnt);
-void	ft_print_hex(unsigned int n, int *cnt, int is_upper);
+void	ft_print_hex(unsigned int n, int *cnt);
+void	ft_print_x(unsigned int n, int *cnt, int visit);
+void	ft_print_xx(unsigned int n, int *cnt, int visit);
 void	ft_print_pcnt(int *cnt);
+void	signchk(int n, int *cnt);
+void	ft_print_nbr(int n, int *cnt, int visit);
+void	ft_print_unbr(unsigned int n, int *cnt, int visit);
 
 #endif
