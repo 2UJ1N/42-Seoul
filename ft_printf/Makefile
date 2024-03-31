@@ -9,7 +9,7 @@ $(NAME): $(OBJS)
 	ar cr $@ $^
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c -o $@ $<
+	$(CC) $(CFLAGS) -o $@ -c $<
 
 all : $(NAME)
 

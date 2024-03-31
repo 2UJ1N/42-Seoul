@@ -6,13 +6,11 @@
 /*   By: youjlee <youjlee@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 18:05:37 by youjlee           #+#    #+#             */
-/*   Updated: 2024/03/30 20:07:12 by youjlee          ###   ########.fr       */
+/*   Updated: 2024/03/31 13:50:13 by youjlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-void	chk_type(char *str, va_list ap, int *cnt);
 
 int	ft_printf(const char *str, ...)
 {
@@ -50,13 +48,13 @@ void	chk_type(char *str, va_list ap, int *cnt)
 	else if (*str == 'p')
 		ft_print_p(va_arg(ap, void *), cnt);
 	else if (*str == 'd' || *str == 'i')
-		signchk(va_arg(ap, int), cnt);
+		ft_putnbr(va_arg(ap, int), cnt);
 	else if (*str == 'u')
 		ft_print_unbr(va_arg(ap, unsigned int), cnt, 0);
 	else if (*str == 'x')
-		ft_print_x(va_arg(ap, unsigned int), cnt, 0);
+		ft_print_x(va_arg(ap, unsigned int), cnt, 1, 0);
 	else if (*str == 'X')
-		ft_print_xx(va_arg(ap, unsigned int), cnt, 0);
+		ft_print_x(va_arg(ap, unsigned int), cnt, 0, 0);
 	else if (*str == '%')
 		ft_print_pcnt(cnt);
 	else
