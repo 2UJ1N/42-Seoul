@@ -1,3 +1,8 @@
+- 과제 수행 결과
+
+  <img width="970" alt="Screen Shot 2024-04-02 at 3 14 38 PM" src="https://github.com/2UJ1N/42-Seoul/assets/83401978/71875d81-d569-40ae-a827-81df4a90403b">
+
+
 - paco 테스트 결과
   
   <img width="695" alt="1" src="https://github.com/2UJ1N/42-Seoul/assets/83401978/0d009973-2c4e-4e61-9b03-fad881b5bee5">
