@@ -6,11 +6,11 @@
 /*   By: youjlee <youjlee@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 19:46:02 by youjlee           #+#    #+#             */
-/*   Updated: 2024/02/21 16:38:06 by youjlee          ###   ########.fr       */
+/*   Updated: 2024/04/02 15:24:57 by youjlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 int	ft_strlen(const char *s)
 {
