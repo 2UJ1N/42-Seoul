@@ -6,7 +6,7 @@
 /*   By: youjlee <youjlee@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/30 16:40:54 by youjlee           #+#    #+#             */
-/*   Updated: 2024/03/31 14:07:07 by youjlee          ###   ########.fr       */
+/*   Updated: 2024/03/31 14:09:11 by youjlee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	ft_print_nbr(int n, int *cnt, int visit)
 			return ;
 		}
 	}
-
+}
 
 void	ft_print_unbr(unsigned int n, int *cnt, int visit)
 {
