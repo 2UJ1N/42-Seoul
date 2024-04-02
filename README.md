@@ -5,7 +5,7 @@
 ![download](https://github.com/2UJ1N/42-Seoul/assets/83401978/cf62e026-e49e-4f12-bae9-dae67f528c7c)
 
 ## 진행 과제 목록
-- libft
-- get_next_line
-- ft_printf
+- [libft](https://github.com/2UJ1N/42-Seoul/tree/main/Circle%200/libft)
+- [get_next_line](https://github.com/2UJ1N/42-Seoul/tree/main/Circle%201/get_next_line)
+- [ft_printf](https://github.com/2UJ1N/42-Seoul/tree/main/Circle%201/ft_printf)
 - born2beroot
